@@ -1,6 +1,7 @@
 ﻿using SuperheroCreator.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -47,6 +48,7 @@ namespace SuperheroCreator.Controllers
 
         // POST: SuperHero/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Superhero superhero)
         {
             try
@@ -61,28 +63,35 @@ namespace SuperheroCreator.Controllers
                 return View();
             }
         }
-        
+
         // GET: SuperHero/Edit/5
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Superhero superhero = db.SuperHeroes.Find(Id);
+            if (superhero == null)
+            {
+                return HttpNotFound();
+            }
+            return View(superhero);
         }
 
         // POST: SuperHero/Edit/5
         [HttpPost]
-        public ActionResult Edit(int Id, Superhero superhero)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,heroName,alterEgo,primaryAbility,secondaryAbility,catchphrase")] Superhero superhero)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add update logic here
-                db.SuperHeroes.Find(superhero);
+                db.Entry(superhero).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+                return View(superhero);
         }
 
         // GET: SuperHero/Delete/5
@@ -102,6 +111,7 @@ namespace SuperheroCreator.Controllers
 
         // POST: SuperHero/Delete/5
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int Id)
         {
             try
