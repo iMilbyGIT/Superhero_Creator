@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace SuperheroCreator.Controllers
 {
+    //https://localhost:44338/SuperHero/Index
     public class SuperHeroController : Controller
     {
         ApplicationDbContext db;
@@ -22,9 +24,18 @@ namespace SuperheroCreator.Controllers
         }
 
         // GET: SuperHero/Details/5
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Superhero superhero = db.SuperHeroes.Find(Id);
+            if (superhero == null)
+            {
+                return HttpNotFound();
+            }
+            return View(superhero);
         }
 
         // GET: SuperHero/Create
@@ -75,14 +86,23 @@ namespace SuperheroCreator.Controllers
         }
 
         // GET: SuperHero/Delete/5
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Superhero superhero = db.SuperHeroes.Find(Id);
+            if (superhero == null)
+            {
+                return HttpNotFound();
+            }
+            return View(superhero);
         }
 
         // POST: SuperHero/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int Id, Superhero superhero)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int Id)
         {
             try
             {
