@@ -22,25 +22,27 @@ namespace SuperheroCreator.Controllers
         }
 
         // GET: SuperHero/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            return View(Id);
         }
 
         // GET: SuperHero/Create
         public ActionResult Create()
         {
-            return View();
+            Superhero superhero = new Superhero();
+            return View(superhero);
         }
 
         // POST: SuperHero/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Superhero superhero)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                db.SuperHeroes.Add(superhero);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -50,19 +52,19 @@ namespace SuperheroCreator.Controllers
         }
 
         // GET: SuperHero/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            return View();
+            return View(Id);
         }
 
         // POST: SuperHero/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int Id, Superhero superhero)
         {
             try
             {
                 // TODO: Add update logic here
-
+                db.SuperHeroes.
                 return RedirectToAction("Index");
             }
             catch
@@ -72,19 +74,20 @@ namespace SuperheroCreator.Controllers
         }
 
         // GET: SuperHero/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int Id)
         {
             return View();
         }
 
         // POST: SuperHero/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int Id, Superhero superhero)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                db.SuperHeroes.Remove(superhero);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
