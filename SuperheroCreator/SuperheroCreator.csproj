@@ -191,6 +191,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\sketchy.bootstrap.css" />
+    <Content Include="Content\sketchy.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,9 +245,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\SuperHero\Create.cshtml" />
-    <Content Include="Views\SuperHero\Details.cshtml" />
     <Content Include="Views\SuperHero\Edit.cshtml" />
     <Content Include="Views\SuperHero\Delete.cshtml" />
+    <Content Include="Views\SuperHero\Details.cshtml" />
+    <Content Include="Views\SuperHero\IndexList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

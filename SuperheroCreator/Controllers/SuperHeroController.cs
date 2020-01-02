@@ -18,13 +18,13 @@ namespace SuperheroCreator.Controllers
         // GET: SuperHero
         public ActionResult Index()
         {
-            return View();
+            return View(db.SuperHeroes.ToList());
         }
 
         // GET: SuperHero/Details/5
         public ActionResult Details(int Id)
         {
-            return View(Id);
+            return View();
         }
 
         // GET: SuperHero/Create
@@ -50,11 +50,11 @@ namespace SuperheroCreator.Controllers
                 return View();
             }
         }
-
+        
         // GET: SuperHero/Edit/5
         public ActionResult Edit(int Id)
         {
-            return View(Id);
+            return View();
         }
 
         // POST: SuperHero/Edit/5
@@ -64,7 +64,8 @@ namespace SuperheroCreator.Controllers
             try
             {
                 // TODO: Add update logic here
-                db.SuperHeroes.
+                db.SuperHeroes.Find(superhero);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -86,6 +87,7 @@ namespace SuperheroCreator.Controllers
             try
             {
                 // TODO: Add delete logic here
+                Superhero superhero = db.SuperHeroes.Find(Id);
                 db.SuperHeroes.Remove(superhero);
                 db.SaveChanges();
                 return RedirectToAction("Index");
