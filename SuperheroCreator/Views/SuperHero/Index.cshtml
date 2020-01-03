@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SuperheroCreator.Models.Superhero>
 
 @{
-    ViewBag.Title = "IndexList";
+    ViewBag.Title = "Super Index";
 }
 
 <h2>IndexList</h2>
@@ -14,18 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.HeroName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AlterEgo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimaryAbility)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondaryAbility)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Catchphrase)
-        </th>
         <th></th>
     </tr>
 
@@ -33,18 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.HeroName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AlterEgo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimaryAbility)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondaryAbility)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Catchphrase)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
